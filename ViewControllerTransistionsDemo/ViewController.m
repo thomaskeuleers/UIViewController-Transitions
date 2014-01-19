@@ -22,7 +22,6 @@
     CGFloat green = arc4random_uniform(255);
     CGFloat blue = arc4random_uniform(255);
     self.view.backgroundColor = [UIColor colorWithRed:red/255.0f green:green/255.0f blue:blue/255.0f alpha:1.0f];
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

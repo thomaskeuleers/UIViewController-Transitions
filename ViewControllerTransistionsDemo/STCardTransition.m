@@ -63,8 +63,6 @@ static UIImage *snapshotView(UIView *view){
                                                         saturationDeltaFactor:0.3
                                                                     maskImage:nil];
     UIImageView *blurredView = [[UIImageView alloc] initWithImage:blurredSnapshot];
-    blurredView.layer.borderColor = [[UIColor redColor] CGColor];
-    blurredView.layer.borderWidth = 2.0f;
     blurredView.frame = [transitionContext containerView].bounds;
     blurredView.alpha = 0.0f;
     [fromViewController.view addSubview:blurredView];
@@ -76,8 +74,6 @@ static UIImage *snapshotView(UIView *view){
                                                                     saturationDeltaFactor:0.3
                                                                                 maskImage:nil];
     UIImageView *blurredToVCView = [[UIImageView alloc] initWithImage:blurredToVCImage];
-    blurredToVCView.layer.borderColor = [[UIColor redColor] CGColor];
-    blurredToVCView.layer.borderWidth = 2.0f;
     blurredToVCView.frame = [transitionContext containerView].bounds;
     blurredToVCView.alpha = 1.0f;
     [toViewController.view addSubview:blurredToVCView];
