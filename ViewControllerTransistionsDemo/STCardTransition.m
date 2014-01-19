@@ -9,16 +9,15 @@
 #import "STCardTransition.h"
 #import "UIImage+ImageEffects.h"
 
-static UIImage *snapshotView(UIView *view){
-    CGSize size = CGSizeMake(CGRectGetWidth(view.bounds), CGRectGetHeight(view.bounds));
-    UIGraphicsBeginImageContext(size);
-    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
-    UIImage *i = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return i;
-}
+@interface UIView(Snapshot)
+
+- (UIImage *)snapShot;
+
+@end
 
 @implementation STCardTransition
+
+#pragma mark - Lifecycle
 
 - (id)init
 {
@@ -29,6 +28,8 @@ static UIImage *snapshotView(UIView *view){
     }
     return self;
 }
+
+#pragma mark - UIViewControllerAnimatedTransitioning methods
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
     return 1.2f;
@@ -45,7 +46,6 @@ static UIImage *snapshotView(UIView *view){
     // Add from viewcontroller to container
     [transitionContext.containerView addSubview:fromViewController.view];
     
-    
     // Calculate which direction to animate to
     CGFloat startY = CGRectGetMaxY([transitionContext containerView].bounds);
     if (self.reverse) startY = -1 * startY;
@@ -58,10 +58,7 @@ static UIImage *snapshotView(UIView *view){
     toViewController.view.layer.transform = scaleTransform;
     
     // Blur fromViewController view
-    UIImage *blurredSnapshot = [snapshotView(fromViewController.view) applyBlurWithRadius:1.0f
-                                                                    tintColor:nil
-                                                        saturationDeltaFactor:0.3
-                                                                    maskImage:nil];
+    UIImage *blurredSnapshot = [self makeBlurredImageFromView:fromViewController.view];
     UIImageView *blurredView = [[UIImageView alloc] initWithImage:blurredSnapshot];
     blurredView.frame = [transitionContext containerView].bounds;
     blurredView.alpha = 0.0f;
@@ -69,10 +66,7 @@ static UIImage *snapshotView(UIView *view){
     
     
     // Blur toViewController view
-    UIImage *blurredToVCImage = [snapshotView(toViewController.view) applyBlurWithRadius:1.0f
-                                                                                tintColor:nil
-                                                                    saturationDeltaFactor:0.3
-                                                                                maskImage:nil];
+    UIImage *blurredToVCImage = [self makeBlurredImageFromView:toViewController.view];
     UIImageView *blurredToVCView = [[UIImageView alloc] initWithImage:blurredToVCImage];
     blurredToVCView.frame = [transitionContext containerView].bounds;
     blurredToVCView.alpha = 1.0f;
@@ -86,22 +80,24 @@ static UIImage *snapshotView(UIView *view){
     CGFloat moveVCs = duration * 0.4f;
     CGFloat scaleToDurantion = duration * 0.2f;
     [UIView animateWithDuration:scaleFromDuration animations:^{
+        // Move fromViewController to the back + make blurred image visible
         blurredView.alpha = 1.0f;
         fromViewController.view.layer.transform = scaleTransform;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:moveVCs animations:^{
-            
+            //Move from/to viewcontroller to new center
             CGPoint oldCenter = fromViewController.view.center;
             CGPoint newCenter = oldCenter;
             newCenter.y = self.reverse ? oldCenter.y  + CGRectGetHeight(fromViewController.view.bounds) : oldCenter.y - CGRectGetHeight(fromViewController.view.bounds);
-            
             fromViewController.view.center = newCenter;
             toViewController.view.center = oldCenter;
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:scaleToDurantion animations:^{
+                // make toViewController not blurred anymore + reset transform
                 blurredToVCView.alpha = 0.0f;
                 toViewController.view.layer.transform = CATransform3DIdentity;
             } completion:^(BOOL finished) {
+                // cleanup + finish transition
                 [blurredView removeFromSuperview];
                 [blurredToVCView removeFromSuperview];
                 [transitionContext completeTransition:YES];
@@ -110,4 +106,24 @@ static UIImage *snapshotView(UIView *view){
     }];
         
 }
+
+#pragma mark - Util
+
+- (UIImage *)makeBlurredImageFromView:(UIView *)view {
+    return [[view snapShot] applyBlurWithRadius:1.0f tintColor:nil saturationDeltaFactor:0.3 maskImage:nil];
+}
+
+@end
+
+@implementation UIView(Snapshot)
+
+- (UIImage *)snapShot {
+    CGSize size = CGSizeMake(CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+    UIGraphicsBeginImageContext(size);
+    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:YES];
+    UIImage *i = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return i;
+}
+
 @end
