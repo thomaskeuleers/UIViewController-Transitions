@@ -22,7 +22,7 @@
 		E9DB5013188C49920049ED34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9DB5011188C49920049ED34 /* InfoPlist.strings */; };
 		E9DB5015188C49920049ED34 /* ViewControllerTransistionsDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DB5014188C49920049ED34 /* ViewControllerTransistionsDemoTests.m */; };
 		E9DB5023188C4B7C0049ED34 /* STCardTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DB5022188C4B7C0049ED34 /* STCardTransition.m */; };
-		E9DB5026188C53FF0049ED34 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DB5025188C53FF0049ED34 /* UIImage+ImageEffects.m */; };
+		E9DB502F188D8B270049ED34 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DB502E188D8B270049ED34 /* UIImage+ImageEffects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +57,8 @@
 		E9DB5014188C49920049ED34 /* ViewControllerTransistionsDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewControllerTransistionsDemoTests.m; sourceTree = "<group>"; };
 		E9DB5021188C4B7C0049ED34 /* STCardTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCardTransition.h; sourceTree = "<group>"; };
 		E9DB5022188C4B7C0049ED34 /* STCardTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCardTransition.m; sourceTree = "<group>"; };
-		E9DB5024188C53FF0049ED34 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "../../../../../Downloads/PhotoTransitionsExample-master/PhotoTransitionsExample/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		E9DB5025188C53FF0049ED34 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "../../../../../Downloads/PhotoTransitionsExample-master/PhotoTransitionsExample/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		E9DB502D188D8B270049ED34 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		E9DB502E188D8B270049ED34 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,8 +118,8 @@
 		E9DB4FEF188C49920049ED34 /* ViewControllerTransistionsDemo */ = {
 			isa = PBXGroup;
 			children = (
-				E9DB5024188C53FF0049ED34 /* UIImage+ImageEffects.h */,
-				E9DB5025188C53FF0049ED34 /* UIImage+ImageEffects.m */,
+				E9DB502D188D8B270049ED34 /* UIImage+ImageEffects.h */,
+				E9DB502E188D8B270049ED34 /* UIImage+ImageEffects.m */,
 				E9DB4FF8188C49920049ED34 /* AppDelegate.h */,
 				E9DB4FF9188C49920049ED34 /* AppDelegate.m */,
 				E9DB4FFB188C49920049ED34 /* Main.storyboard */,
@@ -260,7 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9DB5000188C49920049ED34 /* ViewController.m in Sources */,
-				E9DB5026188C53FF0049ED34 /* UIImage+ImageEffects.m in Sources */,
+				E9DB502F188D8B270049ED34 /* UIImage+ImageEffects.m in Sources */,
 				E9DB5023188C4B7C0049ED34 /* STCardTransition.m in Sources */,
 				E9DB4FFA188C49920049ED34 /* AppDelegate.m in Sources */,
 				E9DB4FF6188C49920049ED34 /* main.m in Sources */,
